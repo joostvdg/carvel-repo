@@ -6,11 +6,8 @@ namespace: "default"
 
 app:
   repositories: ""
-  repositoriesArg: "--repositories"
   grpcPort: 50051
-  grpcPortArg: "--grpcPort"
   httpPort: 8080
-  httpPortArg: "--port"
   httpPrefix: "/"
 
 image:

@@ -1,6 +1,6 @@
 #@ load("@ytt:data", "data")
 ---
-#@ if data.values.ingress.enabled:
+#@ if data.values.httpproxy.enabled:
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
@@ -14,13 +14,13 @@ spec:
     - conditions:
         - prefix: #@ data.values.httpproxy.grpc.prefix 
       services:
-        - name: #@ data.values.appName
+        - name: #@ data.values.name
           port: #@ data.values.app.grpcPort 
           protocol: h2c
     - conditions:
         - prefix: #@ data.values.httpproxy.http.prefix 
       services:
-        - name: #@ data.values.appName
+        - name: #@ data.values.name
           port: #@ data.values.app.httpPort
       pathRewritePolicy:
         replacePrefix:
