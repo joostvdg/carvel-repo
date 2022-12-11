@@ -25,11 +25,11 @@ spec:
           securityContext: #@ data.values.deploy.securityContext
           image: #@ data.values.image.repository + ":" + data.values.image.tag
           args:
-            - #@ '"--repositories"'
+            - #@ "--repositories"
             - #@ data.values.app.repositories
-            - #@ '"--grpcPort"'
+            - #@ "--grpcPort"
             - #@ str(data.values.app.grpcPort)
-            - #@ '"--port"'
+            - #@ "--port"
             - #@ str(data.values.app.httpPort)
           imagePullPolicy: #@ data.values.image.pullPolicy
           ports:

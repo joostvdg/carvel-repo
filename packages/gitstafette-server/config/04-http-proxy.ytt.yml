@@ -21,7 +21,7 @@ spec:
         - prefix: #@ data.values.httpproxy.http.prefix 
       services:
         - name: #@ data.values.name
-          port: #@ data.values.app.httpPort
+          port: #@ data.values.service.port
       pathRewritePolicy:
         replacePrefix:
           - replacement: #@ data.values.httpproxy.http.replacement

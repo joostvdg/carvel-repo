@@ -13,7 +13,7 @@ app:
 image:
   repository: caladreas/gitstafette-server
   pullPolicy: IfNotPresent
-  tag: "0.1.0-1b8922b"
+  tag: "0.1.0-6ed49ec"
   #@schema/type any=True
   #@schema/nullable
   #@schema/default []
