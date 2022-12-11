@@ -3,9 +3,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: '#@ data.values.name'
+  name: #@ data.values.name
   labels:
-    app.kubernetes.io/name: '#@ data.values.name'
+    app.kubernetes.io/name: #@ data.values.name
   annotations: #@ data.values.deploy.annotations
 spec:
   replicas: 1
@@ -26,11 +26,11 @@ spec:
           image: #@ data.values.image.repository + ":" + data.values.image.tag
           args:
             - --repositories
-            - '#@ data.values.app.repositories'
+            - #@ data.values.app.repositories
             - --grpcPort
-            - '#@ data.values.app.grpcPort'
+            - #@ data.values.app.grpcPort
             - --port
-            - '#@ data.values.app.httpPort'
+            - #@ data.values.app.httpPort
           imagePullPolicy: #@ data.values.image.pullPolicy
           ports:
             - name: http

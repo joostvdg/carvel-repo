@@ -20,17 +20,34 @@ image:
   pullSecrets: []
 
 deploy:
-  annotations: {}
-  resources: {}
-  nodeSelector: {}
+  #@schema/nullable
+  #@schema/type any=True
+  annotations: null
+
+  #@schema/nullable
+  #@schema/type any=True
+  resources: null
+
+  #@schema/nullable
+  #@schema/type any=True
+  nodeSelector: null
   
   #@schema/type any=True
   #@schema/nullable
   #@schema/default []
   tolerations: 
-  affinity: {}
-  podSecurityContext: {}
-  securityContext: {}
+  
+  #@schema/nullable
+  #@schema/type any=True
+  affinity: null
+  
+  #@schema/nullable
+  #@schema/type any=True
+  podSecurityContext: null
+
+  #@schema/nullable
+  #@schema/type any=True
+  securityContext: null
 
 service:
   type: ClusterIP
@@ -39,7 +56,10 @@ service:
 ingress:
   enabled: false
   className: ""
-  annotations: {}
+
+  #@schema/nullable
+  #@schema/type any=True
+  annotations: null
   
   #@schema/type any=True
   #@schema/nullable
