@@ -1,0 +1,65 @@
+#@data/values-schema
+
+---
+name: "gitstafette-server"
+namespace: "default"
+
+app:
+  repositories: ""
+  grpcPort: "50051"
+  httpPort: "8080"
+  httpPrefix: "/"
+
+image:
+  repository: caladreas/gitstafette-server
+  pullPolicy: IfNotPresent
+  tag: "0.1.0-1b8922b"
+  #@schema/type any=True
+  #@schema/nullable
+  #@schema/default []
+  pullSecrets: []
+
+deploy:
+  annotations: {}
+  resources: {}
+  nodeSelector: {}
+  
+  #@schema/type any=True
+  #@schema/nullable
+  #@schema/default []
+  tolerations: 
+  affinity: {}
+  podSecurityContext: {}
+  securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  
+  #@schema/type any=True
+  #@schema/nullable
+  #@schema/default []
+  hosts: []
+  
+  #@schema/type any=True
+  #@schema/nullable
+  #@schema/default []
+  tls: []
+
+httpproxy:
+  ingressClassName: contour
+  enabled: false
+  fqdn: lemon.fritz.box
+  annotations: {}
+  grpc:
+    prefix: /
+  http:
+    prefix: /api
+    replacement: /
+
+

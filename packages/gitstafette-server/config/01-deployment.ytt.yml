@@ -1,0 +1,57 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '#@ data.values.name'
+  labels:
+    app.kubernetes.io/name: '#@ data.values.name'
+  annotations: #@ data.values.deploy.annotations
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name:  #@ data.values.name
+  template:
+    metadata:
+      annotations: #@ data.values.deploy.annotations
+      labels:
+        app.kubernetes.io/name:  #@ data.values.name
+    spec:
+      imagePullSecrets: #@ data.values.image.pullSecrets
+      securityContext: #@ data.values.deploy.securityContext
+      containers:
+        - name: #@ data.values.name
+          securityContext: #@ data.values.deploy.securityContext
+          image: #@ data.values.image.repository + ":" + data.values.image.tag
+          args:
+            - --repositories
+            - '#@ data.values.app.repositories'
+            - --grpcPort
+            - '#@ data.values.app.grpcPort'
+            - --port
+            - '#@ data.values.app.httpPort'
+          imagePullPolicy: #@ data.values.image.pullPolicy
+          ports:
+            - name: http
+              containerPort: #@ data.values.app.httpPort
+              protocol: TCP
+            - name: grpc
+              containerPort: #@ data.values.app.grpcPort
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: #@ data.values.app.httpPrefix
+              port: http
+          startupProbe:
+            grpc:
+              port: #@ data.values.app.grpcPort
+            initialDelaySeconds: 5
+          readinessProbe:
+            httpGet:
+              path: #@ data.values.app.httpPrefix
+              port: http
+          resources: #@ data.values.deploy.resources
+      nodeSelector: #@ data.values.deploy.nodeSelector
+      affinity: #@ data.values.deploy.affinity
+      tolerations: #@ data.values.deploy.tolerations

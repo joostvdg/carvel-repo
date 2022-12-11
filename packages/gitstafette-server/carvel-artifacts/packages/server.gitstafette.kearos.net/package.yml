@@ -1,0 +1,162 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: server.gitstafette.kearos.net.0.0.0-08ddea6
+spec:
+  refName: server.gitstafette.kearos.net
+  releasedAt: "2022-12-11T19:30:52Z"
+  template:
+    spec:
+      deploy:
+      - kapp: {}
+      fetch:
+      - imgpkgBundle:
+          image: index.docker.io/caladreas/gitstafette-server-bundle@sha256:a1ccde5c2fe8e9358b3631641b45cc1b4f7c8f3e3f50077c05cb7807b40a37ef
+      template:
+      - ytt:
+          paths:
+          - config
+      - kbld:
+          paths:
+          - '-'
+          - .imgpkg/images.yml
+  valuesSchema:
+    openAPIv3:
+      additionalProperties: false
+      properties:
+        app:
+          additionalProperties: false
+          properties:
+            grpcPort:
+              default: 50051
+              type: integer
+            httpPort:
+              default: 8080
+              type: integer
+            httpPrefix:
+              default: /
+              type: string
+            repositories:
+              default: ""
+              type: string
+          type: object
+        deploy:
+          additionalProperties: false
+          properties:
+            affinity:
+              additionalProperties: false
+              properties: {}
+              type: object
+            annotations:
+              additionalProperties: false
+              properties: {}
+              type: object
+            nodeSelector:
+              additionalProperties: false
+              properties: {}
+              type: object
+            podSecurityContext:
+              additionalProperties: false
+              properties: {}
+              type: object
+            resources:
+              additionalProperties: false
+              properties: {}
+              type: object
+            securityContext:
+              additionalProperties: false
+              properties: {}
+              type: object
+            tolerations:
+              default: []
+              nullable: true
+          type: object
+        httpproxy:
+          additionalProperties: false
+          properties:
+            annotations:
+              additionalProperties: false
+              properties: {}
+              type: object
+            enabled:
+              default: false
+              type: boolean
+            fqdn:
+              default: lemon.fritz.box
+              type: string
+            grpc:
+              additionalProperties: false
+              properties:
+                prefix:
+                  default: /
+                  type: string
+              type: object
+            http:
+              additionalProperties: false
+              properties:
+                prefix:
+                  default: /api
+                  type: string
+                replacement:
+                  default: /
+                  type: string
+              type: object
+            ingressClassName:
+              default: contour
+              type: string
+          type: object
+        image:
+          additionalProperties: false
+          properties:
+            pullPolicy:
+              default: IfNotPresent
+              type: string
+            pullSecrets:
+              default: []
+              nullable: true
+            repository:
+              default: caladreas/gitstafette-server
+              type: string
+            tag:
+              default: 0.1.0-1b8922b
+              type: string
+          type: object
+        ingress:
+          additionalProperties: false
+          properties:
+            annotations:
+              additionalProperties: false
+              properties: {}
+              type: object
+            className:
+              default: ""
+              type: string
+            enabled:
+              default: false
+              type: boolean
+            hosts:
+              default: []
+              nullable: true
+            tls:
+              default: []
+              nullable: true
+          type: object
+        name:
+          default: gitstafette-server
+          type: string
+        namespace:
+          default: default
+          type: string
+        service:
+          additionalProperties: false
+          properties:
+            port:
+              default: 80
+              type: integer
+            type:
+              default: ClusterIP
+              type: string
+          type: object
+      type: object
+  version: 0.0.0-08ddea6
