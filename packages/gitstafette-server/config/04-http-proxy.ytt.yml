@@ -4,9 +4,9 @@
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
-  name: '#@ data.values.name'
+  name: #@ data.values.name
   labels:
-    app.kubernetes.io/name: '#@ data.values.name'
+    app.kubernetes.io/name: #@ data.values.name
   annotations: #@ data.values.httpproxy.annotations
 spec:
   ingressClassName: #@ data.values.httpproxy.ingressClassName

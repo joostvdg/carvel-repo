@@ -6,9 +6,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: '#@ data.values.name'
+  name: #@ data.values.name
   labels:
-    app.kubernetes.io/name: '#@ data.values.name'
+    app.kubernetes.io/name: #@ data.values.name
   annotations: #@ data.values.ingress.annotations
 spec:
   ingressClassName: #@ data.values.ingress.className

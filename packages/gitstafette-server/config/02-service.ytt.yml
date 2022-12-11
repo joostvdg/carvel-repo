@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: #@ data.values.name
   annotations:
-    projectcontour.io/upstream-protocol.h2c: #@ data.values.app.grpcPort
+    projectcontour.io/upstream-protocol.h2c: #@ str(data.values.app.grpcPort)
 spec:
   type: #@ data.values.service.type
   ports:
