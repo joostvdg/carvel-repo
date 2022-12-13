@@ -1,0 +1,9 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  creationTimestamp: null
+  name: client.gitstafette.kearos.net
+spec:
+  displayName: server
+  longDescription: client.gitstafette.kearos.net
+  shortDescription: client.gitstafette.kearos.net

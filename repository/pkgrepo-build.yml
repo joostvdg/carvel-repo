@@ -1,0 +1,9 @@
+apiVersion: kctrl.carvel.dev/v1alpha1
+kind: PackageRepositoryBuild
+metadata:
+  creationTimestamp: "2022-12-11T19:21:32Z"
+  name: carvel.kearos.net
+spec:
+  export:
+    imgpkgBundle:
+      image: index.docker.io/caladreas/carvel-repo
