@@ -2,9 +2,9 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
   creationTimestamp: null
-  name: server.gitstafette.kearos.net.0.0.0
+  name: client.gitstafette.kearos.net.0.0.0
 spec:
-  refName: server.gitstafette.kearos.net
+  refName: client.gitstafette.kearos.net
   releasedAt: null
   template:
     spec:
@@ -26,11 +26,11 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
   creationTimestamp: null
-  name: server.gitstafette.kearos.net
+  name: client.gitstafette.kearos.net
 spec:
   displayName: server
-  longDescription: server.gitstafette.kearos.net
-  shortDescription: server.gitstafette.kearos.net
+  longDescription: client.gitstafette.kearos.net
+  shortDescription: client.gitstafette.kearos.net
 
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
@@ -42,10 +42,10 @@ metadata:
   name: server
 spec:
   packageRef:
-    refName: server.gitstafette.kearos.net
+    refName: client.gitstafette.kearos.net
     versionSelection:
       constraints: 0.0.0
-  serviceAccountName: server-sa
+  serviceAccountName: client-sa
 status:
   conditions: null
   friendlyDescription: ""
