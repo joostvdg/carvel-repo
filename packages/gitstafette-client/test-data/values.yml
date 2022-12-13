@@ -1,0 +1,21 @@
+#@data/values
+---
+app:
+  repositories: "537845873"
+
+image:
+  tag: "0.1.0-5f9d9e6"
+  pullPolicy: IfNotPresent
+
+grpcServer:
+  host: gitstafette-server.gitstafette.svc.cluster.local
+  port: 50051
+  insecureFlag: insecure
+
+deploy:
+  resources:
+    limits:
+      memory: 16Mi
+    requests:
+      cpu: 250m
+      memory: 16Mi

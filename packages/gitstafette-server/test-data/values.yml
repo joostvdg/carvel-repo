@@ -1,0 +1,34 @@
+#@data/values
+---
+name: "gitstafette-server"
+namespace: "gitstafette"
+app:
+  repositories: "537845873"
+  grpcPort: 50051
+  httpPort: 8080
+  httpPrefix: "/"
+image:
+  repository: caladreas/gitstafette-server
+  pullPolicy: IfNotPresent
+  tag: "0.1.0-1b8922b"
+deploy:
+  resources:
+    limits:
+      memory: 16Mi
+    requests:
+      cpu: 250m
+      memory: 16Mi
+service:
+  type: ClusterIP
+  port: 80
+ingress:
+  enabled: false
+httpproxy:
+  ingressClassName: contour
+  enabled: true
+  fqdn: lemon.fritz.box
+  grpc:
+    prefix: /
+  http:
+    prefix: /api
+    replacement: /

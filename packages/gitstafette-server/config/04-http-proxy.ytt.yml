@@ -12,13 +12,13 @@ spec:
   ingressClassName: #@ data.values.httpproxy.ingressClassName
   routes:
     - conditions:
-        - prefix: #@ data.values.httpproxy.grpc.prefix 
+        - prefix: #@ data.values.httpproxy.grpc.prefix
       services:
         - name: #@ data.values.name
-          port: #@ data.values.app.grpcPort 
+          port: #@ data.values.app.grpcPort
           protocol: h2c
     - conditions:
-        - prefix: #@ data.values.httpproxy.http.prefix 
+        - prefix: #@ data.values.httpproxy.http.prefix
       services:
         - name: #@ data.values.name
           port: #@ data.values.service.port
@@ -26,5 +26,5 @@ spec:
         replacePrefix:
           - replacement: #@ data.values.httpproxy.http.replacement
   virtualhost:
-    fqdn:  #@ data.values.httpproxy.fqdn 
+    fqdn:  #@ data.values.httpproxy.fqdn
 #@ end

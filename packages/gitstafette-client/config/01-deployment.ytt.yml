@@ -1,75 +1,51 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "gitstafette-server.fullname" . }}
+  name: #@ data.values.name
   labels:
-    {{- include "gitstafette-server.labels" . | nindent 4 }}
+    app.kubernetes.io/name: #@ data.values.name
+  annotations: #@ data.values.deploy.annotations
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  replicas: 1
   selector:
     matchLabels:
-      {{- include "gitstafette-server.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/name:  #@ data.values.name
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+      annotations: #@ data.values.deploy.annotations
       labels:
-        {{- include "gitstafette-server.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/name:  #@ data.values.name
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "gitstafette-server.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      imagePullSecrets: #@ data.values.image.pullSecrets
+      securityContext: #@ data.values.deploy.securityContext
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        - name: #@ data.values.name
+          securityContext: #@ data.values.deploy.securityContext
+          image: #@ data.values.image.repository + ":" + data.values.image.tag
           args:
-            - --repositories
-            - "{{ .Values.repositories }}"
-            - --grpcPort
-            - "{{ .Values.grpcPort }}"
-            - --port
-            - "{{ .Values.httpPort }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.httpPort }}
-              protocol: TCP
-            - name: grpc
-              containerPort: {{ .Values.grpcPort }}
-              protocol: TCP
+            - "--repo"
+            - #@ str(data.values.app.repositories)
+            - --server
+            - #@ str(data.values.grpcServer.host)
+            - "--port"
+            - #@ data.values.grpcServer.port
+            - #@ data.values.grpcServer.insecureFlag 
+          imagePullPolicy: #@ data.values.image.pullPolicy
           livenessProbe:
             httpGet:
-              path: "{{ .Values.httpPrefix }}"
-              port: http
+              path: /health
+              port: 8080
           startupProbe:
-            grpc:
-              port: {{ .Values.grpcPort }}
-            initialDelaySeconds: 5
+            httpGet:
+              path: /health
+              port: 8080
           readinessProbe:
             httpGet:
-              path: "{{ .Values.httpPrefix }}"
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+              path: /health
+              port: 8080
+          resources: #@ data.values.deploy.resources
+      nodeSelector: #@ data.values.deploy.nodeSelector
+      affinity: #@ data.values.deploy.affinity
+      tolerations: #@ data.values.deploy.tolerations

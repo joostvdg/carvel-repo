@@ -1,4 +1,4 @@
-apiVersion: data.packaging.carvel.dev/v1alpha1
+apiVersion: test-test-data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
   creationTimestamp: null
@@ -22,7 +22,7 @@ spec:
   version: 0.0.0
 
 ---
-apiVersion: data.packaging.carvel.dev/v1alpha1
+apiVersion: test-test-data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
   creationTimestamp: null
