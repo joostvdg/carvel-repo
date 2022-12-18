@@ -30,8 +30,8 @@ spec:
             - --server
             - #@ str(data.values.grpcServer.host)
             - "--port"
-            - #@ data.values.grpcServer.port
-            - #@ data.values.grpcServer.insecureFlag 
+            - #@ str(data.values.grpcServer.port)
+            - #@ str(data.values.grpcServer.insecureFlag)
           imagePullPolicy: #@ data.values.image.pullPolicy
           livenessProbe:
             httpGet:
