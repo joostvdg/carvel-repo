@@ -6,4 +6,4 @@ metadata:
 spec:
   export:
     imgpkgBundle:
-      image: index.docker.io/caladreas/carvel-repo
+      image: ghcr.io/joostvdg/carvel-repo
