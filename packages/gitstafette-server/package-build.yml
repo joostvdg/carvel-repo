@@ -19,7 +19,7 @@ spec:
           - kbld: {}
       export:
       - imgpkgBundle:
-          image: index.docker.io/caladreas/gitstafette-server-bundle
+          image: ghcr.io/joostvdg/gitstafette/server-bundle
           useKbldImagesLock: true
         includePaths:
         - config

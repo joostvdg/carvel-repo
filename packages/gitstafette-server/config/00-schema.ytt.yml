@@ -11,7 +11,7 @@ app:
   httpPrefix: "/"
 
 image:
-  repository: caladreas/gitstafette-server
+  repository: ghcr.io/joostvdg/gitstafette/server
   pullPolicy: IfNotPresent
   tag: "0.1.0-6ed49ec"
   #@schema/type any=True
