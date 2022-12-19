@@ -35,3 +35,4 @@ gitstafette-client-release: gitstafette-client-validate
 		--chdir packages/gitstafette-client \
 		--repo-output ../../repository \
 		--yes
+
