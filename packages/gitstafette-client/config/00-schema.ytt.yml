@@ -12,10 +12,18 @@ grpcServer:
   port: 50051
   insecureFlag: insecure
 
+security:
+  certmanager:
+    generateCert: false
+    host: gitstafette-client.gitstafette.svc.cluster.local
+    issuer:
+      name: ""
+      kind: ""
+
 image:
   repository: ghcr.io/joostvdg/gitstafette/client
   pullPolicy: IfNotPresent
-  tag: "0.1.0-bb3c2fd"
+  tag: "0.1.0-4e4ce45"
   #@schema/type any=True
   #@schema/nullable
   #@schema/default []

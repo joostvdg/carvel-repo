@@ -3,6 +3,13 @@
 app:
   repositories: "537845873"
 
+security:
+  certmanager:
+    generateCert: true
+    issuer:
+      name: "vault-issuer"
+      kind: "ClusterIssuer"
+
 image:
   tag: "0.1.0-5f9d9e6"
   pullPolicy: IfNotPresent

@@ -1,0 +1,17 @@
+#@ load("@ytt:data", "data")
+#@ load("funcs.lib.yml", "TLSSecretName", "TLSCertName")
+---
+#@ if data.values.security.certmanager.generateCert:
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: #@ TLSCertName(data.values.security.certmanager.host)
+spec:
+  secretName: #@ TLSSecretName(data.values.security.certmanager.host)
+  issuerRef:
+    name: #@ data.values.security.certmanager.issuer.name
+    kind: #@ data.values.security.certmanager.issuer.kind
+  commonName: #@ data.values.security.certmanager.host
+  dnsNames:
+    - #@ data.values.security.certmanager.host
+#@ end

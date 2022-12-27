@@ -1,4 +1,6 @@
 #@ load("@ytt:data", "data")
+#@ load("funcs.lib.yml", "TLSSecretName", "TLSCertName")
+#@ load("@ytt:overlay", "overlay")
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -46,6 +48,39 @@ spec:
               path: /health
               port: 8080
           resources: #@ data.values.deploy.resources
+          #@ if data.values.security.certmanager.generateCert:
+          volumeMounts:
+            - mountPath: "/etc/tls"
+              name: tls
+              readOnly: true
+          #@ end
       nodeSelector: #@ data.values.deploy.nodeSelector
       affinity: #@ data.values.deploy.affinity
       tolerations: #@ data.values.deploy.tolerations
+      #@ if data.values.security.certmanager.generateCert:
+      volumes:
+        - name: tls
+          secret:
+            secretName: #@ TLSSecretName(data.values.security.certmanager.host)
+      #@ end
+
+---
+#@ if data.values.security.certmanager.generateCert:
+#@overlay/match by=overlay.and_op(overlay.subset({"kind": "Deployment"}), overlay.subset({"metadata": {"name": data.values.name}}))
+---
+spec:
+  template:
+    spec:
+      containers:
+        #@overlay/match by="name"
+        - name: #@ data.values.name
+          args:
+            #@overlay/append
+            - #@ "--secure"
+            - #@ "--caFileLocation"
+            - #@ "/etc/tls/ca.crt"
+            - #@ "--certFileLocation"
+            - #@ "/etc/tls/tls.crt"
+            - #@ "--certKeyFileLocation"
+            - #@ "/etc/tls/tls.key"
+#@ end
