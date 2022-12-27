@@ -14,8 +14,9 @@ security:
       name: "vault-issuer"
       kind: "ClusterIssuer"
 image:
-  repository: caladreas/gitstafette-server
+  repository: ghcr.io/joostvdg/gitstafette/server
   pullPolicy: IfNotPresent
+  sha: "sha256:ce52a501b5ae1a931d5176f76b3120efeeafa721e53c56d795d2147692277677"
   tag: "0.1.0-1b8922b"
 deploy:
   resources:
