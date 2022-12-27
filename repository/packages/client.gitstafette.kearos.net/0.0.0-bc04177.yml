@@ -2,25 +2,22 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
   creationTimestamp: null
-  name: client.gitstafette.kearos.net.0.0.0-426505f
+  name: client.gitstafette.kearos.net.0.0.0-bc04177
 spec:
   refName: client.gitstafette.kearos.net
-  releasedAt: "2022-12-19T21:40:00Z"
+  releasedAt: "2022-12-27T16:38:57Z"
   template:
     spec:
       deploy:
       - kapp: {}
       fetch:
       - imgpkgBundle:
-          image: ghcr.io/joostvdg/gitstafette/client-bundle@sha256:af084db944fb00721fa62828fbf4f947c097d2664f247d71c7e87cf1593de4d8
+          image: ghcr.io/joostvdg/gitstafette/client-bundle@sha256:58ad7efabfa81c5fdc71edc97c4b54cbc1f0da59442059a07528674babfdc3fa
       template:
       - ytt:
           paths:
           - config
-      - kbld:
-          paths:
-          - '-'
-          - .imgpkg/images.yml
+      - kbld: {}
   valuesSchema:
     openAPIv3:
       additionalProperties: false
@@ -83,7 +80,7 @@ spec:
               default: ghcr.io/joostvdg/gitstafette/client
               type: string
             tag:
-              default: 0.1.0-bb3c2fd
+              default: 0.1.0-4e4ce45
               type: string
           type: object
         name:
@@ -92,5 +89,29 @@ spec:
         namespace:
           default: default
           type: string
+        security:
+          additionalProperties: false
+          properties:
+            certmanager:
+              additionalProperties: false
+              properties:
+                generateCert:
+                  default: false
+                  type: boolean
+                host:
+                  default: gitstafette-client.gitstafette.svc.cluster.local
+                  type: string
+                issuer:
+                  additionalProperties: false
+                  properties:
+                    kind:
+                      default: ""
+                      type: string
+                    name:
+                      default: ""
+                      type: string
+                  type: object
+              type: object
+          type: object
       type: object
-  version: 0.0.0-426505f
+  version: 0.0.0-bc04177

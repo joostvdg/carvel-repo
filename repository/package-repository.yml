@@ -2,13 +2,13 @@ apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageRepository
 metadata:
   annotations:
-    kctrl.carvel.dev/repository-version: 0.0.0-815d16c
-  creationTimestamp: "2022-12-19T20:10:59Z"
+    kctrl.carvel.dev/repository-version: 0.0.0-bc04177
+  creationTimestamp: "2022-12-27T15:56:51Z"
   name: carvel.kearos.net
 spec:
   fetch:
     imgpkgBundle:
-      image: ghcr.io/joostvdg/carvel-repo@sha256:f7f56a3b1b9dada1ee1fa5a80b7b7e050d002d2a207ebc6c867f87be9a13ec40
+      image: ghcr.io/joostvdg/carvel-repo@sha256:5e9f705b70772906ccf233f092d853d7bec2ad31f1d1b4fbddf649959bbbd6df
 status:
   conditions: null
   friendlyDescription: ""
