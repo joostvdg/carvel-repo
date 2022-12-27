@@ -1,0 +1,92 @@
+#@data/values-schema
+
+---
+name: "gitstafette-server"
+namespace: "default"
+
+app:
+  repositories: ""
+  grpcPort: 50051
+  httpPort: 8080
+  httpPrefix: "/"
+
+image:
+  repository: ghcr.io/joostvdg/gitstafette/server
+  pullPolicy: IfNotPresent
+  tag: "0.1.0-4e4ce45"
+  #@schema/type any=True
+  #@schema/nullable
+  #@schema/default []
+  pullSecrets: []
+
+security:
+  certmanager:
+    generateCert: false
+    issuer:
+      name: ""
+      kind: ""
+
+deploy:
+  #@schema/nullable
+  #@schema/type any=True
+  annotations: null
+
+  #@schema/nullable
+  #@schema/type any=True
+  resources: null
+
+  #@schema/nullable
+  #@schema/type any=True
+  nodeSelector: null
+  
+  #@schema/type any=True
+  #@schema/nullable
+  #@schema/default []
+  tolerations: 
+  
+  #@schema/nullable
+  #@schema/type any=True
+  affinity: null
+  
+  #@schema/nullable
+  #@schema/type any=True
+  podSecurityContext: null
+
+  #@schema/nullable
+  #@schema/type any=True
+  securityContext: null
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+
+  #@schema/nullable
+  #@schema/type any=True
+  annotations: null
+  
+  #@schema/type any=True
+  #@schema/nullable
+  #@schema/default []
+  hosts: []
+  
+  #@schema/type any=True
+  #@schema/nullable
+  #@schema/default []
+  tls: []
+
+httpproxy:
+  ingressClassName: contour
+  enabled: false
+  fqdn: lemon.fritz.box
+  annotations: {}
+  grpc:
+    prefix: /
+  http:
+    prefix: /api
+    replacement: /
+
+

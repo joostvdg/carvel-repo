@@ -25,11 +25,7 @@ spec:
       containers:
         - name: #@ data.values.name
           securityContext: #@ data.values.deploy.securityContext
-          #@ if data.values.image.sha:
-          image: #@ data.values.image.repository + "@" + data.values.image.sha
-          #@ else:
           image: #@ data.values.image.repository + ":" + data.values.image.tag
-          #@ end
           args:
             - #@ "--repositories"
             - #@ data.values.app.repositories
@@ -86,6 +82,7 @@ spec:
         - name: #@ data.values.name
           args:
             #@overlay/append
+            - #@ "--secure"
             - #@ "--caFileLocation"
             - #@ "/etc/tls/ca.crt"
             - #@ "--certFileLocation"

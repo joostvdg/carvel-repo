@@ -1,0 +1,7 @@
+#@ def TLSCertName(domain):
+#@ return str(domain).replace(".", "-")
+#@ end
+
+#@ def TLSSecretName(domain):
+#@ return str(domain).replace(".", "-") + "-tls"
+#@ end
