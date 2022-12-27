@@ -20,6 +20,6 @@ spec:
       export:
       - imgpkgBundle:
           image: ghcr.io/joostvdg/gitstafette/server-bundle
-          useKbldImagesLock: true
         includePaths:
         - config
+        - .imgpkg/images.yml
