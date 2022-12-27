@@ -2,17 +2,17 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
   creationTimestamp: null
-  name: server.gitstafette.kearos.net.0.0.0-84a6f15
+  name: server.gitstafette.kearos.net.0.0.0-f550dcd
 spec:
   refName: server.gitstafette.kearos.net
-  releasedAt: "2022-12-27T18:49:57Z"
+  releasedAt: "2022-12-27T19:01:49Z"
   template:
     spec:
       deploy:
       - kapp: {}
       fetch:
       - imgpkgBundle:
-          image: ghcr.io/joostvdg/gitstafette/server-bundle@sha256:4c2d6788b44c3704b567488cdcabafe2fe2ef532268c9e70e642f247e1eee7e6
+          image: ghcr.io/joostvdg/gitstafette/server-bundle@sha256:fe23e9024ff056a56d637722c27aeb023ece1e179410b648ffe6c2ca52ba14b3
       template:
       - ytt:
           paths:
@@ -172,4 +172,4 @@ spec:
               type: string
           type: object
       type: object
-  version: 0.0.0-84a6f15
+  version: 0.0.0-f550dcd
