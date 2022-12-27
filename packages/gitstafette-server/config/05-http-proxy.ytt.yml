@@ -1,4 +1,5 @@
 #@ load("@ytt:data", "data")
+#@ load("funcs.lib.yml", "TLSSecretName", "TLSCertName")
 ---
 #@ if data.values.httpproxy.enabled:
 apiVersion: projectcontour.io/v1
@@ -27,4 +28,8 @@ spec:
           - replacement: #@ data.values.httpproxy.http.replacement
   virtualhost:
     fqdn:  #@ data.values.httpproxy.fqdn
+    #@ if data.values.security.certmanager.generateCert:
+    tls:
+      secretName: #@ TLSSecretName(data.values.httpproxy.fqdn)
+    #@ end
 #@ end

@@ -7,6 +7,12 @@ app:
   grpcPort: 50051
   httpPort: 8080
   httpPrefix: "/"
+security:
+  certmanager:
+    generateCert: true
+    issuer:
+      name: "vault-issuer"
+      kind: "ClusterIssuer"
 image:
   repository: caladreas/gitstafette-server
   pullPolicy: IfNotPresent

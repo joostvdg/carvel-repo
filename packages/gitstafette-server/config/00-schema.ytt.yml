@@ -13,11 +13,18 @@ app:
 image:
   repository: ghcr.io/joostvdg/gitstafette/server
   pullPolicy: IfNotPresent
-  tag: "0.1.0-6ed49ec"
+  tag: "0.1.0-4e4ce45"
   #@schema/type any=True
   #@schema/nullable
   #@schema/default []
   pullSecrets: []
+
+security:
+  certmanager:
+    generateCert: false
+    issuer:
+      name: ""
+      kind: ""
 
 deploy:
   #@schema/nullable
