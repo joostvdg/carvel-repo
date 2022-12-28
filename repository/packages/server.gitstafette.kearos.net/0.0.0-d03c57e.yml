@@ -2,17 +2,17 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
   creationTimestamp: null
-  name: server.gitstafette.kearos.net.0.0.0-9498929
+  name: server.gitstafette.kearos.net.0.0.0-d03c57e
 spec:
   refName: server.gitstafette.kearos.net
-  releasedAt: "2022-12-28T10:13:05Z"
+  releasedAt: "2022-12-28T11:00:49Z"
   template:
     spec:
       deploy:
       - kapp: {}
       fetch:
       - imgpkgBundle:
-          image: ghcr.io/joostvdg/gitstafette/server-bundle@sha256:fd141393057408f42d5b08099e1f92ef1a7a1971525b56736a6c3dda288f270a
+          image: ghcr.io/joostvdg/gitstafette/server-bundle@sha256:dc46b6038cfdd0ea159eef051986e94663b02761ac04b5c406ecdb8054da7007
       template:
       - ytt:
           paths:
@@ -24,6 +24,9 @@ spec:
         app:
           additionalProperties: false
           properties:
+            grpcHealthPort:
+              default: 50052
+              type: integer
             grpcPort:
               default: 50051
               type: integer
@@ -112,7 +115,7 @@ spec:
               default: ""
               type: string
             tag:
-              default: 0.1.0-3c19f37
+              default: 0.1.0-4de3564
               type: string
           type: object
         ingress:
@@ -172,4 +175,4 @@ spec:
               type: string
           type: object
       type: object
-  version: 0.0.0-9498929
+  version: 0.0.0-d03c57e
