@@ -35,6 +35,8 @@ spec:
             - #@ data.values.app.repositories
             - #@ "--grpcPort"
             - #@ str(data.values.app.grpcPort)
+            - #@ "--grpcHealthPort"
+            - #@ str(data.values.app.grpcHealthPort)
             - #@ "--port"
             - #@ str(data.values.app.httpPort)
           imagePullPolicy: #@ data.values.image.pullPolicy
@@ -51,7 +53,7 @@ spec:
               port: http
           startupProbe:
             grpc:
-              port: #@ data.values.app.grpcPort
+              port: #@ data.values.app.grpcHealthPort
             initialDelaySeconds: 5
           readinessProbe:
             httpGet:

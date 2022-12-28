@@ -7,6 +7,7 @@ namespace: "default"
 app:
   repositories: ""
   grpcPort: 50051
+  grpcHealthPort: 50052
   httpPort: 8080
   httpPrefix: "/"
 
