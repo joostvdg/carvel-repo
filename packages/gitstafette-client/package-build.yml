@@ -16,7 +16,6 @@ spec:
           - ytt:
               paths:
               - config
-          - kbld: {}
       export:
       - imgpkgBundle:
           image: ghcr.io/joostvdg/gitstafette/client-bundle
