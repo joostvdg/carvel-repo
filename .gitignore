@@ -1,8 +1,2 @@
-packages/gitstafette-client/carvel-artifacts/
-packages/gitstafette-server/
-packages/gitstafette-server/
-!packages/gitstafette-server/config/
-!packages/gitstafette-server/test-data/
-!packages/gitstafette-server/package-build.yml
-!packages/gitstafette-server/kctrl-dev-app.yml
-!packages/gitstafette-server/package-resources.yml
+packages/**/carvel-artifacts/
+packages/**/bundle-*/*
