@@ -84,3 +84,27 @@ spec:
             - #@ "--certKeyFileLocation"
             - #@ "/etc/tls/tls.key"
 #@ end
+
+---
+#@ if data.values.relay.enabled:
+#@overlay/match by=overlay.and_op(overlay.subset({"kind": "Deployment"}), overlay.subset({"metadata": {"name": data.values.name}}))
+---
+spec:
+  template:
+    spec:
+      containers:
+        #@overlay/match by="name"
+        - name: #@ data.values.name
+          args:
+            #@overlay/append
+            - #@ "--relayEnabled"
+            - #@ "true"
+            - #@ "--relayHost"
+            - #@ str(data.values.relay.host)
+            - #@ "--relayPort"
+            - #@ str(data.values.relay.port)
+            - #@ "--relayProtocol"
+            - #@ str(data.values.relay.protocol)
+            - #@ "--relayInsecure"
+            - #@ str(data.values.relay.insecure)
+            #@ end

@@ -6,6 +6,7 @@ app:
 security:
   certmanager:
     generateCert: true
+    host: client
     issuer:
       name: "vault-issuer"
       kind: "ClusterIssuer"
