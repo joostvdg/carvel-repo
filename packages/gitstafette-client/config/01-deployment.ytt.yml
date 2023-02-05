@@ -27,12 +27,11 @@ spec:
           securityContext: #@ data.values.deploy.securityContext
           image: #@ data.values.image.repository + ":" + data.values.image.tag
           args:
-            - "--repo"
-            - #@ str(data.values.app.repositories)
-            - --server
-            - #@ str(data.values.grpcServer.host)
-            - "--port"
-            - #@ str(data.values.grpcServer.port)
+            - #@ "--repo="+str(data.values.app.repositories)
+            - #@ "--clientId="+str(data.values.app.clientId)
+            - #@ "--server="+str(data.values.grpcServer.host)
+            - #@ "--port="+str(data.values.grpcServer.port)
+            - #@ "--streamWindow="+str(data.values.grpcServer.streamWindow)
             - #@ str(data.values.grpcServer.insecureFlag)
           imagePullPolicy: #@ data.values.image.pullPolicy
           livenessProbe:
@@ -77,12 +76,9 @@ spec:
           args:
             #@overlay/append
             - #@ "--secure"
-            - #@ "--caFileLocation"
-            - #@ "/etc/tls/ca.crt"
-            - #@ "--certFileLocation"
-            - #@ "/etc/tls/tls.crt"
-            - #@ "--certKeyFileLocation"
-            - #@ "/etc/tls/tls.key"
+            - #@ "--caFileLocation=/etc/tls/ca.crt"
+            - #@ "--certFileLocation=/etc/tls/tls.crt"
+            - #@ "--certKeyFileLocation=/etc/tls/tls.key"
 #@ end
 
 ---
@@ -97,14 +93,11 @@ spec:
         - name: #@ data.values.name
           args:
             #@overlay/append
-            - #@ "--relayEnabled"
-            - #@ "true"
-            - #@ "--relayHost"
-            - #@ str(data.values.relay.host)
-            - #@ "--relayPort"
-            - #@ str(data.values.relay.port)
-            - #@ "--relayProtocol"
-            - #@ str(data.values.relay.protocol)
-            - #@ "--relayInsecure"
-            - #@ str(data.values.relay.insecure)
+            - #@ "--relayEnabled=true"
+            - #@ "--relayHost="+str(data.values.relay.host)
+            - #@ "--relayPath="+str(data.values.relay.path)
+            - #@ "--relayHealthCheckPath="+str(data.values.relay.healthCheckPath)
+            - #@ "--relayPort="+str(data.values.relay.port)
+            - #@ "--relayProtocol="+str(data.values.relay.protocol)
+            - #@ "--relayInsecure="+str(data.values.relay.insecure)
             #@ end

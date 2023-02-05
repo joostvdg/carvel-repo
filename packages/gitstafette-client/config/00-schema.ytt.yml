@@ -6,16 +6,20 @@ namespace: "default"
 
 app:
   repositories: ""
+  clientId: "carvel"
 
 grpcServer:
   host: gitstafette-server.gitstafette.svc.cluster.local
   port: 50051
   insecureFlag: insecure
+  streamWindow: 180
 
 relay:
   enabled: false
   host: "127.0.0.1"
   port: "50051"
+  path: "/"
+  healthCheckPath: "/"
   protocol: "http"
   insecure: true
 
@@ -31,7 +35,7 @@ image:
   repository: ghcr.io/joostvdg/gitstafette/client
   pullPolicy: IfNotPresent
   sha: ""
-  tag: "0.1.0-4de3564"
+  tag: "0.1.0-8889ec3"
   #@schema/type any=True
   #@schema/nullable
   #@schema/default []

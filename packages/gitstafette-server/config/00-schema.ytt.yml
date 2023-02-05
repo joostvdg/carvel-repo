@@ -15,7 +15,7 @@ image:
   repository: ghcr.io/joostvdg/gitstafette/server
   pullPolicy: IfNotPresent
   sha: ""
-  tag: "0.1.0-4de3564"
+  tag: "0.1.0-8889ec3"
   #@schema/type any=True
   #@schema/nullable
   #@schema/default []
