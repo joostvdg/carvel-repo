@@ -6,8 +6,11 @@ metadata:
   name:  #@ data.values.name
   labels:
     app.kubernetes.io/name: #@ data.values.name
+  #! Only needed when using normal Ingress
+  #@ if data.values.ingress.enabled:
   annotations:
     projectcontour.io/upstream-protocol.h2c: #@ '"' + str(data.values.app.grpcPort) + '"'
+  #@ end
 spec:
   type: #@ data.values.service.type
   ports:

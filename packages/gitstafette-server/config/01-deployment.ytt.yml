@@ -95,3 +95,39 @@ spec:
             - #@ "--certKeyFileLocation"
             - #@ "/etc/tls/tls.key"
 #@ end
+---
+---
+#@ if data.values.security.certmanager.generateCert and data.values.security.caOnly:
+#@overlay/match by=overlay.and_op(overlay.subset({"kind": "Deployment"}), overlay.subset({"metadata": {"name": data.values.name}}))
+---
+spec:
+  template:
+    spec:
+      containers:
+        #@overlay/match by="name"
+        - name: #@ data.values.name
+          args:
+            #@overlay/append
+            - #@ "--caFileLocation"
+            - #@ "/etc/tls/ca.crt"
+            #@ end
+---
+#@ if data.values.security.certmanager.generateCert and not data.values.security.caOnly:
+#@overlay/match by=overlay.and_op(overlay.subset({"kind": "Deployment"}), overlay.subset({"metadata": {"name": data.values.name}}))
+---
+spec:
+  template:
+    spec:
+      containers:
+        #@overlay/match by="name"
+        - name: #@ data.values.name
+          args:
+            #@overlay/append
+            - #@ "--caFileLocation"
+            - #@ "/etc/tls/ca.crt"
+            - #@ "--certFileLocation"
+            - #@ "/etc/tls/tls.crt"
+            - #@ "--certKeyFileLocation"
+            - #@ "/etc/tls/tls.key"
+            #@ end
+---
