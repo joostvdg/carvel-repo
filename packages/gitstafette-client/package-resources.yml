@@ -28,7 +28,7 @@ metadata:
   creationTimestamp: null
   name: client.gitstafette.kearos.net
 spec:
-  displayName: server
+  displayName: client
   longDescription: client.gitstafette.kearos.net
   shortDescription: client.gitstafette.kearos.net
 

@@ -13,6 +13,9 @@ grpcServer:
   port: 50051
   insecureFlag: insecure
   streamWindow: 180
+  oauthToken:
+    enabled: false
+    secretName: ""
 
 relay:
   enabled: false
@@ -35,7 +38,7 @@ image:
   repository: ghcr.io/joostvdg/gitstafette/client
   pullPolicy: IfNotPresent
   sha: ""
-  tag: "0.1.0-28ac5c7"
+  tag: "0.1.0-571fe1d"
   #@schema/type any=True
   #@schema/nullable
   #@schema/default []
@@ -71,3 +74,6 @@ deploy:
   #@schema/type any=True
   securityContext: null
 
+  #@schema/nullable
+  #@schema/type any=True
+  env: null

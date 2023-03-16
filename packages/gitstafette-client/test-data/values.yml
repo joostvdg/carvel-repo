@@ -18,7 +18,9 @@ image:
 grpcServer:
   host: gitstafette-server.gitstafette.svc.cluster.local
   port: 50051
-  insecureFlag: insecure
+  oauthToken:
+    enabled: true
+    secretName: "gitstafette-client-gcr-oauth"
 
 deploy:
   resources:
