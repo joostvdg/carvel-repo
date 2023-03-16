@@ -2,21 +2,25 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
   creationTimestamp: null
-  name: server.gitstafette.kearos.net.0.0.0-d03c57e
+  name: server.gitstafette.kearos.net.0.1.0-537f40c
 spec:
   refName: server.gitstafette.kearos.net
-  releasedAt: "2022-12-28T11:00:49Z"
+  releasedAt: "2023-03-16T16:14:42Z"
   template:
     spec:
       deploy:
       - kapp: {}
       fetch:
       - imgpkgBundle:
-          image: ghcr.io/joostvdg/gitstafette/server-bundle@sha256:dc46b6038cfdd0ea159eef051986e94663b02761ac04b5c406ecdb8054da7007
+          image: ghcr.io/joostvdg/gitstafette/server-bundle@sha256:9212eee71eeeb6a952d3e95ef498f3f969b4114b83d9a1310c83b6309427686f
       template:
       - ytt:
           paths:
           - config
+      - kbld:
+          paths:
+          - '-'
+          - .imgpkg/images.yml
   valuesSchema:
     openAPIv3:
       additionalProperties: false
@@ -115,7 +119,7 @@ spec:
               default: ""
               type: string
             tag:
-              default: 0.1.0-4de3564
+              default: 0.1.0-8889ec3
               type: string
           type: object
         ingress:
@@ -146,6 +150,9 @@ spec:
         security:
           additionalProperties: false
           properties:
+            caOnly:
+              default: false
+              type: boolean
             certmanager:
               additionalProperties: false
               properties:
@@ -175,4 +182,4 @@ spec:
               type: string
           type: object
       type: object
-  version: 0.0.0-d03c57e
+  version: 0.1.0-537f40c
