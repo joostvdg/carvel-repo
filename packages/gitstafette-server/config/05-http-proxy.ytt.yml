@@ -17,7 +17,7 @@ spec:
       services:
         - name: #@ data.values.name
           port: #@ data.values.app.grpcPort
-          protocol: h2c
+          protocol: #@ data.values.httpproxy.grpc.protocol
     - conditions:
         - prefix: #@ data.values.httpproxy.http.prefix
       services:

@@ -84,10 +84,11 @@ ingress:
 httpproxy:
   ingressClassName: contour
   enabled: false
-  fqdn: lemon.fritz.box
+  fqdn: gitstafette.home.lab
   annotations: {}
   grpc:
     prefix: /
+    protocol: h2c
   http:
     prefix: /api
     replacement: /
