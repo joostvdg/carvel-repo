@@ -23,6 +23,7 @@ image:
 
 security:
   caOnly: false
+  useGeneratedCert: false
   certmanager:
     generateCert: false
     issuer:

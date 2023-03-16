@@ -76,7 +76,7 @@ spec:
             secretName: #@ TLSSecretName(data.values.httpproxy.fqdn)
       #@ end
 ---
-#@ if data.values.security.certmanager.generateCert and data.values.security.caOnly:
+#@ if data.values.security.useGeneratedCert and data.values.security.caOnly:
 #@overlay/match by=overlay.and_op(overlay.subset({"kind": "Deployment"}), overlay.subset({"metadata": {"name": data.values.name}}))
 ---
 spec:
@@ -91,7 +91,7 @@ spec:
             - #@ "/etc/tls/ca.crt"
             #@ end
 ---
-#@ if data.values.security.certmanager.generateCert and not data.values.security.caOnly:
+#@ if data.values.security.useGeneratedCert and not data.values.security.caOnly:
 #@overlay/match by=overlay.and_op(overlay.subset({"kind": "Deployment"}), overlay.subset({"metadata": {"name": data.values.name}}))
 ---
 spec:
