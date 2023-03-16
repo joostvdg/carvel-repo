@@ -30,6 +30,7 @@ spec:
           #@ else:
           image: #@ data.values.image.repository + ":" + data.values.image.tag
           #@ end
+          env: #@ data.values.deploy.env
           args:
             - #@ "--repositories"
             - #@ data.values.app.repositories

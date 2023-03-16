@@ -60,6 +60,10 @@ deploy:
   #@schema/type any=True
   securityContext: null
 
+  #@schema/nullable
+  #@schema/type any=True
+  env: null
+
 service:
   type: ClusterIP
   port: 80
