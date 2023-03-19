@@ -29,6 +29,15 @@ deploy:
     requests:
       cpu: 250m
       memory: 16Mi
+  env:
+    - name: GRPC_TRACE
+      value: all
+    - name: GRPC_VERBOSITY
+      value: DEBUG
+    - name: GRPC_GO_LOG_VERBOSITY_LEVEL
+      value: 2
+    - name: GRPC_GO_LOG_SEVERITY_LEVEL
+      value: info
 
 relay:
   enabled: true
