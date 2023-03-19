@@ -17,7 +17,7 @@ image:
   repository: ghcr.io/joostvdg/gitstafette/server
   pullPolicy: IfNotPresent
   sha: "sha256:ce52a501b5ae1a931d5176f76b3120efeeafa721e53c56d795d2147692277677"
-  tag: "0.1.0-1b8922b"
+  tag: "0.1.0-e0a2c7d"
 deploy:
   resources:
     limits:
@@ -25,6 +25,15 @@ deploy:
     requests:
       cpu: 250m
       memory: 16Mi
+  env:
+    - name: GRPC_TRACE
+      value: all
+    - name: GRPC_VERBOSITY
+      value: DEBUG
+    - name: GRPC_GO_LOG_VERBOSITY_LEVEL
+      value: 2
+    - name: GRPC_GO_LOG_SEVERITY_LEVEL
+      value: info
 service:
   type: ClusterIP
   port: 80

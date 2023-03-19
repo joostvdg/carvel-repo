@@ -111,3 +111,21 @@ spec:
             - #@ "/etc/tls/tls.key"
             #@ end
 ---
+
+
+#@ if data.values.app.grpcPort != data.values.app.grpcHealthPort:
+#@overlay/match by=overlay.and_op(overlay.subset({"kind": "Deployment"}), overlay.subset({"metadata": {"name": data.values.name}}))
+---
+spec:
+  template:
+    spec:
+      containers:
+        #@overlay/match by="name"
+        - name: #@ data.values.name
+          ports:
+            #@overlay/append
+            - name: grpc-healthcheck
+              containerPort: #@ data.values.app.grpcHealthPort
+              protocol: TCP
+            #@ end
+---
