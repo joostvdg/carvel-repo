@@ -1,4 +1,5 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
 ---
 apiVersion: v1
 kind: Service
@@ -24,3 +25,18 @@ spec:
       protocol: TCP
   selector:
     app.kubernetes.io/name: #@ data.values.name
+
+---
+
+#@ if data.values.app.grpcPort != data.values.app.grpcHealthPort:
+#@overlay/match by=overlay.and_op(overlay.subset({"kind": "Service"}), overlay.subset({"metadata": {"name": data.values.name}}))
+---
+spec:
+  ports:
+    #@overlay/append
+    - name: grpc-healthcheck
+      port: #@ data.values.app.grpcHealthPort
+      targetPort: #@ data.values.app.grpcHealthPort
+      protocol: TCP
+  #@ end
+---
